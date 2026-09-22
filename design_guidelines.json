@@ -1,0 +1,104 @@
+{
+  "project_name": "FARLIGHT",
+  "app_type": "hybrid_fullstack",
+  "theme": {
+    "mode": "light",
+    "archetype": "Organic & Earthy mixed with Luxury (Architectural)",
+    "colors": {
+      "background_primary": "#FAFAFA",
+      "background_secondary": "#F3EFE9",
+      "text_primary": "#2A2726",
+      "text_secondary": "#5C5855",
+      "accent_primary": "#D4A373",
+      "accent_secondary": "#8A9A5B",
+      "surface_glass": "rgba(255, 255, 255, 0.7)",
+      "dark_surface": "#1A1817"
+    },
+    "typography": {
+      "headings_font": "Cormorant Garamond",
+      "body_font": "Manrope",
+      "scale": {
+        "h1": "text-5xl sm:text-6xl+ tracking-tighter leading-none font-medium",
+        "h2": "text-4xl sm:text-5xl tracking-tight leading-tight",
+        "h3": "text-2xl sm:text-3xl tracking-tight",
+        "body": "text-base leading-relaxed",
+        "overline": "text-xs uppercase tracking-[0.2em] font-semibold"
+      }
+    },
+    "spacing": "Generous spacing. Use p-12, p-16, p-24 for section paddings. Create breathing room between elements.",
+    "borders_and_shadows": {
+      "radius": "rounded-sm",
+      "shadows": "shadow-[0_8px_30px_rgba(42,39,38,0.04)]",
+      "borders": "border border-[#2A2726]/10"
+    }
+  },
+  "layout_and_sections": [
+    {
+      "name": "Header",
+      "style": "Glassmorphism (backdrop-blur-xl bg-white/70, border-b border-white/20). Sticky z-50.",
+      "components": ["Language Selector (IT/EN dropdown)", "Logo", "Primary CTA"]
+    },
+    {
+      "name": "Hero",
+      "style": "Architectural asymmetrical layout. Massive typography for H1. Clean lines.",
+      "content": "H1: Progettazione Illuminotecnica d'Autore. Sub: Veloce. Economico. Da remoto.",
+      "special_elements": "A prominent, elegant video slot placeholder (a frame with an image backdrop and a stylized 'Play' button overlay) since the user will upload a video later."
+    },
+    {
+      "name": "Manifesto (Chi Siamo)",
+      "style": "Split layout. Image of two female architects on one side, clean editorial text on the other. Use elegant serif for the manifesto statement."
+    },
+    {
+      "name": "Punti di Forza",
+      "style": "4-item elegant bento grid or list. Very light background cards, subtle borders, high inner padding (p-8).",
+      "content": "1. Risparmio di tempo, 2. Stima accurata dei Lux, 3. Moodboard d'impatto, 4. Consapevolezza budget."
+    },
+    {
+      "name": "Form 'Richiedi Concept Preliminare'",
+      "style": "High-end form UI. Split screen: left side warm background with instructions/benefits, right side clean white card containing the form.",
+      "fields": "Nome/Studio, Tipologia Spazio (Dropdown), Superficie mq (Number), Altezza soffitto (Number), Fascia Budget (Dropdown), Stile illuminazione (Input), Upload PDF/DWG (File input), Note di cantiere (Textarea)."
+    },
+    {
+      "name": "Piani e Listino (Pricing)",
+      "style": "2 distinct pricing cards. 'Prestazione Occasionale' in cream/white. 'Abbonamento Studio Pro' in dark charcoal or amber for premium contrast.",
+      "features": "Stripe payment integration placeholder, disclaimer for preliminary consulting."
+    },
+    {
+      "name": "Consulenza Diretta Studio",
+      "style": "Escalation section for complex projects (Hotels, Public Works). Full-width luxury image background with dark/warm overlay (bg-black/40), white text, and a distinct CTA."
+    },
+    {
+      "name": "Footer & Contatti",
+      "style": "Deep espresso (#1A1817) background. Light text. Quick contact form and placeholder email (info@farlight.it)."
+    }
+  ],
+  "components_to_use": [
+    "lucide-react (Icons: Play, Check, Upload, ChevronDown, etc.)",
+    "Shadcn UI: Form, Input, Textarea, Select, Button, Card, DropdownMenu (for language selector)",
+    "Framer Motion (for smooth scroll reveals and micro-interactions)"
+  ],
+  "image_urls": [
+    {
+      "category": "hero_video_placeholder",
+      "description": "Elegant minimalist architectural interior with beautiful warm light and shadow.",
+      "url": "https://images.unsplash.com/photo-1567016376408-0226e4d0c1ea?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMzN8MHwxfHNlYXJjaHwxfHxtaW5pbWFsaXN0JTIwd2FybSUyMGxpZ2h0JTIwYXJjaGl0ZWN0dXJlJTIwaW50ZXJpb3IlMjBjcmVhbXxlbnwwfHx8fDE3OTAwNzk2MDZ8MA&ixlib=rb-4.1.0&q=85"
+    },
+    {
+      "category": "manifesto_architects",
+      "description": "Two women reviewing architectural blueprints, representing Alessia and Alessandra.",
+      "url": "https://images.pexels.com/photos/8729972/pexels-photo-8729972.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+    },
+    {
+      "category": "escalation_luxury",
+      "description": "Luxury hotel warm lighting interior, for the 'Consulenza Diretta' section.",
+      "url": "https://images.pexels.com/photos/34496713/pexels-photo-34496713.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+    },
+    {
+      "category": "abstract_light_texture",
+      "description": "Abstract white window blinds shadow on cream wall, can be used as subtle background texture.",
+      "url": "https://images.unsplash.com/photo-1622651491473-ff3824d12768?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMzN8MHwxfHNlYXJjaHw0fHxtaW5pbWFsaXN0JTIwd2FybSUyMGxpZ2h0JTIwYXJjaGl0ZWN0dXJlJTIwaW50ZXJpb3IlMjBjcmVhbXxlbnwwfHx8fDE3OTAwNzk2MDZ8MA&ixlib=rb-4.1.0&q=85"
+    }
+  ],
+  "accessibility_and_testing": "All interactive and key informational elements MUST include a 'data-testid' attribute (e.g., data-testid='hero-cta-button', data-testid='contact-submit'). Use ARIA labels for icon-only buttons. Ensure minimum 4.5:1 contrast ratio.",
+  "instructions_to_main_agent": "Build a highly sophisticated, editorial-style React/Tailwind frontend. Use 'Cormorant Garamond' for headings and 'Manrope' for body (import via Google Fonts). Ensure 'data-testid' is present on all actionable elements. Keep the aesthetic 'chiaro, pulito, sofisticato' (light, clean, sophisticated). Never use generic blue/indigo default styles; adhere strictly to the amber/cream/green palette. Implement Shadcn components for forms and dropdowns, but style them to fit the luxury architectural theme (e.g., remove heavy borders, use subtle backgrounds). Do NOT use transparent backgrounds for the dropdown menu or sticky header over content without a blur/solid base. Provide all content in Italian by default, with English placeholders in the locale switcher if applicable."
+}
