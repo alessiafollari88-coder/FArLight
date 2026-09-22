@@ -1,6 +1,8 @@
 import React, { useState } from "react";
-import { Globe, Menu } from "lucide-react";
+import { Link } from "react-router-dom";
+import { Globe, Menu, User } from "lucide-react";
 import { useLanguage } from "../i18n";
+import { useAuth } from "../auth";
 import { Button } from "../components/ui/button";
 import {
   DropdownMenu,
@@ -12,6 +14,7 @@ import { Sheet, SheetContent, SheetTrigger } from "../components/ui/sheet";
 
 export const Header = () => {
   const { lang, setLang, t } = useLanguage();
+  const { user } = useAuth();
   const [open, setOpen] = useState(false);
 
   const links = [
@@ -41,6 +44,15 @@ export const Header = () => {
         <DropdownMenuItem data-testid="language-option-en" onClick={() => setLang("en")} className="text-sm cursor-pointer">
           English
         </DropdownMenuItem>
+        <DropdownMenuItem data-testid="language-option-fr" onClick={() => setLang("fr")} className="text-sm cursor-pointer">
+          Français
+        </DropdownMenuItem>
+        <DropdownMenuItem data-testid="language-option-de" onClick={() => setLang("de")} className="text-sm cursor-pointer">
+          Deutsch
+        </DropdownMenuItem>
+        <DropdownMenuItem data-testid="language-option-es" onClick={() => setLang("es")} className="text-sm cursor-pointer">
+          Español
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );
@@ -49,7 +61,7 @@ export const Header = () => {
     <header className="fixed top-0 inset-x-0 z-50 bg-white/70 backdrop-blur-xl border-b border-white/40">
       <div className="max-w-7xl mx-auto px-6 lg:px-12 h-16 flex items-center justify-between">
         <a href="#top" data-testid="logo-link" className="font-display text-2xl font-semibold tracking-tight text-ink">
-          FAR<span className="text-amberdark">LIGHT</span>
+          FAr<span className="text-amberdark">Light</span>
         </a>
         <nav className="hidden lg:flex items-center gap-8">
           {links.map((l) => (
@@ -60,6 +72,25 @@ export const Header = () => {
         </nav>
         <div className="flex items-center gap-5">
           <LangSelector />
+          {user ? (
+            <Link
+              to="/account"
+              data-testid="account-link"
+              className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.15em] text-inksoft hover:text-ink transition-colors"
+            >
+              <User className="w-4 h-4" strokeWidth={1.5} />
+              <span className="hidden sm:inline">{user.name?.split(" ")[0]}</span>
+            </Link>
+          ) : (
+            <Link
+              to="/login"
+              data-testid="login-link"
+              className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.15em] text-inksoft hover:text-ink transition-colors"
+            >
+              <User className="w-4 h-4" strokeWidth={1.5} />
+              {t.auth.login}
+            </Link>
+          )}
           <Button
             asChild
             data-testid="header-cta-button"

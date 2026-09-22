@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { motion } from "framer-motion";
 import { Upload, Check, X } from "lucide-react";
@@ -7,6 +7,7 @@ import { useLanguage } from "../i18n";
 import { Input } from "../components/ui/input";
 import { Textarea } from "../components/ui/textarea";
 import { Label } from "../components/ui/label";
+import { Checkbox } from "../components/ui/checkbox";
 import {
   Select,
   SelectContent,
@@ -25,8 +26,15 @@ export const ConceptForm = () => {
   const [done, setDone] = useState(false);
   const [form, setForm] = useState({
     name: "", email: "", space_type: "", surface: "", ceiling_height: "",
-    budget_range: "", light_style: "", notes: "",
+    budget_range: "", light_style: "", notes: "", include_lamp_schedule: false,
   });
+  const [preferredBrands, setPreferredBrands] = useState([]);
+
+  useEffect(() => {
+    const handler = (e) => setPreferredBrands(e.detail || []);
+    window.addEventListener("farlight:brands", handler);
+    return () => window.removeEventListener("farlight:brands", handler);
+  }, []);
 
   const set = (key) => (e) => setForm({ ...form, [key]: e.target ? e.target.value : e });
 
@@ -39,7 +47,8 @@ export const ConceptForm = () => {
     setSubmitting(true);
     try {
       const data = new FormData();
-      Object.entries(form).forEach(([k, v]) => data.append(k, v));
+      Object.entries(form).forEach(([k, v]) => data.append(k, typeof v === "boolean" ? String(v) : v));
+      data.append("preferred_brands", preferredBrands.join(","));
       files.forEach((f) => data.append("files", f));
       await axios.post(`${API}/concept-requests`, data);
       setDone(true);
@@ -93,6 +102,13 @@ export const ConceptForm = () => {
               </span>
               <h3 className="font-display text-3xl text-ink">{t.form.successTitle}</h3>
               <p className="mt-4 text-sm text-inksoft leading-relaxed max-w-md mx-auto">{t.form.successDesc}</p>
+              <a
+                data-testid="concept-success-account-link"
+                href="/account"
+                className="mt-8 inline-flex items-center border border-ink text-ink hover:bg-ink hover:text-cream transition-colors rounded-sm px-8 h-11 text-xs font-semibold uppercase tracking-[0.15em]"
+              >
+                {t.account.viewAccount}
+              </a>
             </div>
           ) : (
             <form
@@ -177,6 +193,40 @@ export const ConceptForm = () => {
                     ))}
                   </ul>
                 )}
+              </div>
+              {preferredBrands.length > 0 && (
+                <div data-testid="concept-preferred-brands" className="space-y-2">
+                  <Label className="text-xs uppercase tracking-[0.15em] font-semibold text-inksoft">{t.form.preferredBrands}</Label>
+                  <div className="flex flex-wrap gap-2">
+                    {preferredBrands.map((b) => (
+                      <span key={b} className="inline-flex items-center gap-2 bg-amberl/15 border border-amberdark/40 text-ink text-xs font-semibold rounded-sm px-3 py-1.5">
+                        {b}
+                        <button
+                          type="button"
+                          data-testid={`concept-brand-remove-${b.toLowerCase().replace(/[\s&]/g, "-")}`}
+                          onClick={() => setPreferredBrands(preferredBrands.filter((x) => x !== b))}
+                          aria-label="Rimuovi"
+                          className="text-inksoft hover:text-ink"
+                        >
+                          <X className="w-3 h-3" />
+                        </button>
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
+              <div className="flex items-start gap-3 bg-sand/60 border border-ink/10 rounded-sm p-5">
+                <Checkbox
+                  id="cf-lamps"
+                  data-testid="concept-lamp-schedule-checkbox"
+                  checked={form.include_lamp_schedule}
+                  onCheckedChange={(v) => setForm({ ...form, include_lamp_schedule: v === true })}
+                  className="mt-0.5 border-ink/30 data-[state=checked]:bg-amberdark data-[state=checked]:border-amberdark"
+                />
+                <div>
+                  <Label htmlFor="cf-lamps" className="text-sm font-semibold text-ink cursor-pointer">{t.form.lampSchedule}</Label>
+                  <p className="mt-1 text-xs leading-relaxed text-inksoft">{t.form.lampScheduleHint}</p>
+                </div>
               </div>
               <div className="space-y-2">
                 <Label htmlFor="cf-notes" className="text-xs uppercase tracking-[0.15em] font-semibold text-inksoft">{t.form.notes}</Label>

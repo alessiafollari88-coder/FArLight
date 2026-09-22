@@ -17,11 +17,15 @@ Sito web professionale e moderno in ITALIANO per FARLIGHT (consulenza illuminote
 - Palette: cream #FAFAFA, sand #F3EFE9, ink #2A2726, amber #D4A373, sage #8A9A5B, espresso #1A1817
 
 ## Implementato (22/09/2026)
-- Home one-page: Header glass con selettore IT/EN, Hero con slot video, Manifesto, 4 Punti di forza, Video Tutorial (4 step + player), Form Concept con upload su object storage, Pricing con checkout Stripe (2 piani, disclaimer), Escalation con CTA che preseleziona topic nel form contatti, Footer/Contatti con form
-- API: POST /api/concept-requests (multipart+upload), POST /api/contact-messages, POST /api/payments/checkout, GET /api/payments/status/{id}, POST /api/stripe/webhook, GET /api/files/{path}
-- Stripe: catalogo creato (price farlight_occasional €49, farlight_studio_pro €149/mese), tax_mode=full (IT, SMP), webhook idempotente, fallback polling stato
-- Pagine: /payment/success (polling stato), /payment/cancel
-- Test: backend 8/8 via curl; UI e2e via Playwright (lingua EN/IT, form+upload, redirect Stripe, escalation, contatti, mobile 390px) — tutto verde
+- Home one-page: Header glass con selettore 5 lingue (IT/EN/FR/DE/ES), Hero con slot video, Manifesto, 4 Punti di forza, Video Tutorial (4 step + player), Form Concept con upload su object storage, Cataloghi 32 brand selezionabili (i brand scelti finiscono nella richiesta), Pricing con checkout Stripe (2 piani, disclaimer), Escalation con CTA che preseleziona topic, Footer/Contatti con form
+- Auth: Emergent Google sign-in + email/password (bcrypt + session cookie httpOnly), pagina /login, area personale /account protetta
+- AI: a ogni richiesta concept, Claude Sonnet 4.6 genera anteprima testuale (lux, atmosfera, corpi illuminanti), GPT Image 1 genera moodboard; opzione "Abaco Lampade" con Claude + web_search (marca/modello/codice/link ufficiale per rivenditori); brand preselezionati dal sito inclusi nei prompt
+- Report PDF firmato FArLight (reportlab) + versione editabile .md, entrambi scaricabili dall'area personale
+- API: concept-requests (multipart+upload+AI), contact-messages, auth (register/login/session/me/logout), my/requests, payments (checkout/status/webhook), files/{path}
+- Stripe: catalogo (€49, €149/mese), tax_mode=full (IT), webhook idempotente
+- Test e2e: backend curl + Playwright (registrazione, login, submit, anteprima AI con testo+immagine, redirect Stripe, selezione brand→form, mobile)
+- NOTA: budget Emergent LLM key esaurito ($1.30/$1.00) — generazioni AI e video Sora in pausa fino a ricarica
+- PayPal: in attesa di Client ID/Secret dall'utente (developer.paypal.com)
 
 ## Da fare / Backlog
 - P0: Sostituire email info@farlight.it con email reale; caricare video presentazione.mp4 e tutorial.mp4 in /app/frontend/public/videos/

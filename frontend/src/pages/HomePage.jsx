@@ -5,6 +5,7 @@ import { Manifesto } from "../components/Manifesto";
 import { Strengths } from "../components/Strengths";
 import { VideoTutorial } from "../components/VideoTutorial";
 import { ConceptForm } from "../components/ConceptForm";
+import { Catalogs } from "../components/Catalogs";
 import { Pricing } from "../components/Pricing";
 import { Escalation } from "../components/Escalation";
 import { ContactFooter } from "../components/ContactFooter";
@@ -19,6 +20,7 @@ export default function HomePage() {
         <Strengths />
         <VideoTutorial />
         <ConceptForm />
+        <Catalogs />
         <Pricing />
         <Escalation />
       </main>

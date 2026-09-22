@@ -118,10 +118,10 @@ export const ContactFooter = () => {
       <div className="border-t border-cream/10">
         <div className="max-w-7xl mx-auto px-6 lg:px-12 py-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="font-display text-xl font-semibold tracking-tight">
-            FAR<span className="text-amberl">LIGHT</span>
+            FAr<span className="text-amberl">Light</span>
           </p>
           <p className="text-xs text-cream/50 tracking-wide">{t.footer.tagline}</p>
-          <p data-testid="footer-rights" className="text-xs text-cream/40">© {new Date().getFullYear()} FARLIGHT — {t.footer.rights}</p>
+          <p data-testid="footer-rights" className="text-xs text-cream/40">© {new Date().getFullYear()} FArLight — {t.footer.rights}</p>
         </div>
       </div>
     </footer>
